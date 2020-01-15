@@ -16,23 +16,28 @@
     show
 @endsection
 
-@section('side_asn')
+@section('side_wbs')
     active
 @endsection
 
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h5 mb-4 text-gray-800"><a href='/admin/asn'>Data ASN </a> | Edit Data</h1>
+    <h1 class="h5 mb-4 text-gray-800"><a href='/admin/pjlp'>Data WBS </a> | Detail Data</h1>
     <div class="card shadow mb-4">
-        @foreach($data as $a)
+        @foreach($data as $w)
         <div class="card-header border-0">
             <div class="row">
                 <div class="col-md-6">
-                    <a href="{{route('asn.index')}}"><button class="btn btn-md btn-success"><i class="fa fa-arrow-left"></i> Kembali</button></a>
+                    <a href="{{route('wbs.index')}}"><button class="btn btn-md btn-success"><i class="fa fa-arrow-left"></i> Kembali</button></a>
                     <h3 class="mb-0"></h3>
                 </div>
                 <div class="col-md-6">
-                    
+                    <form action="{{route('asn.destroy',$w->id_wbs)}}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    <button type="submit" class="btn btn-sm btn-outline-danger float-right" title="Hapus"><i class="fa fa-trash"></i></button>
+                    </form>
+                    <a href="{{route('wbs.edit',$w->id_wbs)}}"><button class="btn btn-sm btn-outline-warning float-right" title="Edit"><i class="fa fa-pen"></i></button></a>
                 </div>
             </div>
         </div>
@@ -42,34 +47,33 @@
                     <div class="card shadow mb-4">
                         <div class="card-header border-0 py-3">
                             <div class="row">
-                                <h6 class="m-0 font-weight-bold text-primary">Data Diri ASN</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Data Diri WBS</h6>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{route('asn.update',$a->id_asn)}}" method="post" enctype="multipart/form-data">
-                                {{ csrf_field() }}
-                                {{method_field('PUT')}}
-                                <input type="hidden" name="id_asn" value="{{$a->id_asn}}">
-                                <div class="form-group">
-                                    <label for="NIP">NIP</label>
-                                    <input type="text" name="nip" class="form-control" value="{{$a->nip}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="NRK">NRK</label>
-                                    <input type="text" name="nrk" class="form-control" value="{{$a->nrk}}">
-                                </div>                                   
+                            <form action="{{ route('wbs.store') }}" method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}                                  
                                 <div class="form-group">
                                     <label for="Nama">Nama</label>
-                                    <input type="text" name="nama" class="form-control" value="{{$a->nama}}">
+                                    <input type="text" name="nama" class="form-control" value="{{$w->nama}}" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Jabatan">Jabatan</label>
-                                    <input type="text" name="jabatan" class="form-control" value="{{$a->jabatan}}">
+                                    <label for="Tempat Lahir">Tempat Lahir</label>
+                                    <input type="text" name="tempat_lahir" class="form-control" value="{{$w->tempat_lahir}}" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Golongan">Golongan</label>
-                                    <input type="text" name="golongan" class="form-control" value="{{$a->golongan}}">
+                                    <label for="Tanggal Lahir">Tanggal Lahir</label>
+                                    <input type="date" name="tanggal_lahir" class="form-control" value="{{$w->tanggal_lahir}}" disabled>
                                 </div>
+                                <div class="form-group">
+                                    <label for="Agama">Agama</label>
+                                    <input type="text" name="agama" class="form-control" value="{{$w->agama}}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Alamat">Alamat</label>
+                                    <textarea class="form-control" rows="5" name="alamat" disabled>{{$w->nama}}</textarea>
+                                </div>							
+
                         </div>
                     </div>
                 </div>
@@ -82,27 +86,25 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                @if($a->photo)
-                                    <img src="{{url('/assets-admin/img/asn/'.$a->photo)}}" style="border:5px" width="250" />
+                                @if($w->photo)
+                                    <img src="{{url('/assets-admin/img/asn/'.$w->photo)}}" style="border:5px" width="250" />
                                 @else
                                     <img src="{{url('/assets-admin/img/asn/default.jpg')}}" style="border:5px" width="250" />
-                                @endif  
-                                {{-- <img src="{{url('/assets-admin/img/asn/'.$a->photo)}}" style="border:5px" width="250" height=""/> --}}
-                                <br><br>
-                                <input type="file" name="photo" class="uploads">
-                                <input type="hidden" name="hidden_photo" value="{{$a->photo}}">
-                            </div> 
+                                @endif 
+                                {{-- <input type="file" name="photo" class="uploads"> --}}
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach
         <div class="card-footer py-4">
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{route('asn.index')}}" class=" btn btn-danger">Batal</a>
+            {{-- <button type="submit" class="btn btn-primary">Tambah</button>
+            <a href="{{route('wbs.index')}}" class=" btn btn-danger">Batal</a> --}}
         </form>                 
         </div>
+        @endforeach
     </div>
 
 @endsection

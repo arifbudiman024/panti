@@ -23,6 +23,9 @@
 @section('content')
     <!-- Page Heading -->
     <h1 class="h5 mb-4 text-gray-800">Data PJLP</h1>
+    @if (Session::has('message'))
+        <div class="alert alert-{{ Session::get('message_type') }}">{{ Session::get('message') }}</div>
+    @endif
 
     <div class="card shadow mb-4">
         <div class="card-header border-0">
@@ -59,7 +62,7 @@
                                 @else
                                     <img src="{{url('/assets-admin/img/pjlp/default.jpg')}}" alt="image" width="50px;" />
                                 @endif    
-                                <a href="{{route('asn.show',$p->id_pjlp)}}">{{$p->nama}}</a>
+                                <a href="{{route('pjlp.show',$p->id_pjlp)}}">{{$p->nama}}</a>
                             </td>
                             <td>{{$p->nik}}</td>
                             <td>{{$p->jabatan}}</td>
@@ -70,7 +73,7 @@
                                     {{ method_field('DELETE') }}
                                     <a href="{{route('pjlp.show',$p->id_pjlp)}}" class="btn btn-sm btn-outline-info" title="detail"><i class="fa fa-info-circle"></i></a>
                                     <a href="{{route('pjlp.edit',$p->id_pjlp)}}" class="btn btn-sm btn-outline-warning" title="edit"><i class="fa fa-pen"></i></a>
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="hapus"><i class="fa fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Anda yakin akan menghapus data ini?')" title="hapus"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

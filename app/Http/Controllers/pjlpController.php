@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class pjlpController extends Controller
 {
@@ -38,7 +39,18 @@ class pjlpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('pjlp')
+            ->insert([
+                'nik' => $request->nik,
+                'nama' => $request->nama,
+                'jabatan' => $request->jabatan,
+                'no_hp' => $request->no_hp
+                // 'photo' => $request->photo
+            ]);
+        
+        Session::flash('message', 'Berhasil ditambahkan!');
+        Session::flash('message_type', 'success');
+        return redirect()->route('pjlp.index');
     }
 
     /**
@@ -49,7 +61,11 @@ class pjlpController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = DB::table('pjlp')
+                    ->where('id_pjlp',$id)
+                    ->get();
+
+        return view('admin.pjlp.show',compact('data'));
     }
 
     /**
@@ -60,7 +76,11 @@ class pjlpController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = DB::table('pjlp')
+                    ->where('id_pjlp',$id)
+                    ->get();
+
+        return view('admin.pjlp.edit',compact('data'));
     }
 
     /**
@@ -72,7 +92,21 @@ class pjlpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = DB::table('pjlp')
+        ->where('id_pjlp',$id)
+        ->select('id_pjlp','nik','nama','jabatan','no_hp','photo')
+        ->update([
+            'id_pjlp' => $request->id_pjlp,
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'jabatan' => $request->jabatan,
+            'no_hp' => $request->no_hp,
+            'photo' =>$request->hidden_photo
+        ]);
+    
+        Session::flash('message', 'Berhasil diupdate!');
+        Session::flash('message_type', 'warning');
+        return redirect()->route('pjlp.index');
     }
 
     /**
@@ -87,6 +121,8 @@ class pjlpController extends Controller
             ->where('id_pjlp',$id)
             ->delete();
         
-        return redirect()->route('pjlp.index')->with('alert-success','Data berhasi dihapus!');
+        Session::flash('message', 'Berhasil dihapus!');
+        Session::flash('message_type', 'danger');
+        return redirect()->route('pjlp.index');
     }
 }

@@ -31,6 +31,9 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('asn', 'asnController');
         Route::resource('pjlp', 'pjlpController');
         Route::resource('wbs', 'wbsController');
+
+        Route::resource('bimbingan', 'bimbinganController');
+        Route::resource('laporan', 'laporanController');
     });
 });
 

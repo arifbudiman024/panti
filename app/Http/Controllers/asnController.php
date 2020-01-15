@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class asnController extends Controller
 {
@@ -38,7 +39,18 @@ class asnController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('asn')
+            ->insert([
+                'nip' => $request->nip,
+                'nrk' => $request->nrk,
+                'nama' => $request->nama,
+                'jabatan' => $request->jabatan,
+                'golongan' => $request->golongan
+            ]);
+        
+        Session::flash('message', 'Berhasil ditambahkan!');
+        Session::flash('message_type', 'success');
+        return redirect()->route('asn.index');
     }
 
     /**
@@ -65,8 +77,8 @@ class asnController extends Controller
     public function edit($id)
     {
         $data = DB::table('asn')
-        ->where('id_asn',$id)
-        ->get();
+                    ->where('id_asn',$id)
+                    ->get();
 
         return view('admin.asn.edit',compact('data'));
     }
@@ -80,7 +92,22 @@ class asnController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = DB::table('asn')
+            ->where('id_asn',$id)
+            ->select('id_asn','nip','nrk','nama','jabatan','golongan','photo')
+            ->update([
+                'id_asn' => $request->id_asn,
+                'nip' => $request->nip,
+                'nrk' => $request->nrk,
+                'nama' => $request->nama,
+                'jabatan' => $request->jabatan,
+                'golongan' => $request->golongan,
+                'photo' =>$request->hidden_photo
+            ]);
+        
+        Session::flash('message', 'Berhasil diupdate!');
+        Session::flash('message_type', 'warning');
+        return redirect()->route('asn.index');
     }
 
     /**
@@ -94,6 +121,9 @@ class asnController extends Controller
         DB::table('asn')
             ->where('id_asn',$id)
             ->delete();
-        return redirect()->route('asn.index')->with('alert-success','Data berhasi dihapus!');
+
+        Session::flash('message', 'Berhasil dihapus!');
+        Session::flash('message_type', 'danger');
+        return redirect()->route('asn.index');
     }
 }

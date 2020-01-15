@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class wbsController extends Controller
 {
@@ -38,7 +39,19 @@ class wbsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('wbs')
+            ->insert([
+                'nama' => $request->nama,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'agama' => $request->agama,
+                'alamat' => $request->alamat
+                // 'photo' => $request->photo
+            ]);
+        
+        Session::flash('message', 'Berhasil ditambahkan!');
+        Session::flash('message_type', 'success');
+        return redirect()->route('wbs.index');
     }
 
     /**
@@ -49,7 +62,11 @@ class wbsController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = DB::table('wbs')
+                    ->where('id_wbs',$id)
+                    ->get();
+
+        return view('admin.wbs.show',compact('data'));
     }
 
     /**
@@ -60,7 +77,11 @@ class wbsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = DB::table('wbs')
+                    ->where('id_wbs',$id)
+                    ->get();
+
+        return view('admin.wbs.edit',compact('data'));
     }
 
     /**
@@ -72,7 +93,22 @@ class wbsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = DB::table('wbs')
+                    ->where('id_wbs',$id)
+                    ->select('id_wbs','nama','tempat_lahir','tanggal_lahir','agama','alamat','photo')
+                    ->update([
+                        'id_wbs' => $request->id_wbs,
+                        'nama' => $request->nama,
+                        'tempat_lahir' => $request->tempat_lahir,
+                        'tanggal_lahir' => $request->tanggal_lahir,
+                        'agama' => $request->agama,
+                        'alamat' => $request->alamat,
+                        'photo' =>$request->hidden_photo
+                    ]);
+    
+        Session::flash('message', 'Berhasil diupdate!');
+        Session::flash('message_type', 'warning');
+        return redirect()->route('wbs.index');
     }
 
     /**
@@ -86,7 +122,9 @@ class wbsController extends Controller
         DB::table('wbs')
             ->where('id_wbs',$id)
             ->delete();
-    
-        return redirect()->route('wbs.index')->with('alert-success','Data berhasi dihapus!');
+        
+        session::flash('message', 'Berhasil dihapus!');
+        session::flash('message_type', 'danger');
+        return redirect()->route('wbs.index');
     }
 }

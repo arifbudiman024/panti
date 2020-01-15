@@ -23,6 +23,9 @@
 @section('content')
     <!-- Page Heading -->
     <h1 class="h5 mb-4 text-gray-800">Data ASN</h1>
+    @if (Session::has('message'))
+        <div class="alert alert-{{ Session::get('message_type') }}">{{ Session::get('message') }}</div>
+    @endif
 
     <div class="card shadow mb-4">
         <div class="card-header border-0">
@@ -37,7 +40,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                 {{-- <table class="table table-striped table-bordered" id="table"> --}}
                     <thead>
                         <tr>
@@ -70,7 +73,7 @@
                                     {{ method_field('DELETE') }}
                                     <a href="{{route('asn.show',$a->id_asn)}}" class="btn btn-sm btn-outline-info" title="detail"><i class="fa fa-info-circle"></i></a>
                                     <a href="{{route('asn.edit',$a->id_asn)}}" class="btn btn-sm btn-outline-warning" title="edit"><i class="fa fa-pen"></i></a>
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="hapus"><i class="fa fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Anda yakin akan menghapus data ini?')" title="hapus"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

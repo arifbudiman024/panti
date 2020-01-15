@@ -76,22 +76,22 @@
     <!-- Nav Item - Pages Collapse Menu -->
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+    <li class="nav-item @yield('nav_bimbingan')">
+    <a class="nav-link" href="/admin/bimbingan">
         <i class="fas fa-fw fa-book"></i>
         <span>Bimbingan</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
-    <a class="nav-link" href="tables.html">
+    <li class="nav-item @yield('nav_jadwal')">
+    <a class="nav-link" href="/admin/jadwal">
         <i class="fas fa-fw fa-calendar"></i>
         <span>Jadwal Piket</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
-    <a class="nav-link" href="tables.html">
+    <li class="nav-item @yield('nav_laporan')">
+    <a class="nav-link" href="/admin/laporan">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Laporan Shalat PJLP</span></a>
     </li>

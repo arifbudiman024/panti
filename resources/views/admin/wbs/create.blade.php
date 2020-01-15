@@ -36,7 +36,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="card shadow mb-4">
                         <div class="card-header border-0 py-3">
                             <div class="row">
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="card shadow mb-4">
                         <div class="card-header border-0 py-3">
                             <div class="row">

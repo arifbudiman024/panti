@@ -55,7 +55,7 @@
                 {{method_field('PUT')}}
                 <input type="hidden" name="id_profil" value="{{$v->id_profil}}">
                 <input type="hidden" name="nama_profil" value="{{$v->nama_profil}}">
-                <textarea class="form-control" rows="5" name="deskripsi">{{$v->deskripsi}}</textarea>
+                <textarea class="form-control" rows="13" name="deskripsi">{{$v->deskripsi}}</textarea>
         </div>
         <div class="card-footer py-4">
             <button type="submit" class="btn btn-primary">Update</button>

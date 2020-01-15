@@ -28,7 +28,7 @@
                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{$asn}}</div>
                 </div>
                 <div class="col-auto">
-                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                  <i class="fas fa-folder fa-2x text-gray-300"></i>
                 </div>
               </div>
             </div>
@@ -45,7 +45,7 @@
                   <div class="h5 mb-0 font-weight-bold text-gray-800">{{$pjlp}}</div>
                 </div>
                 <div class="col-auto">
-                  <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                  <i class="fas fa-file fa-2x text-gray-300"></i>
                 </div>
               </div>
             </div>
@@ -84,11 +84,11 @@
             <div class="card-body">
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                  {{-- <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Jam</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800"></div> --}}
+                  <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Laporan</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                 </div>
                 <div class="col-auto">
-                  <i class="fas fa-clock fa-2x text-gray-300"></i>
+                  <i class="fas fa-clipboard fa-2x text-gray-300"></i>
                 </div>
               </div>
             </div>

@@ -35,15 +35,15 @@
                     <form action="{{route('asn.destroy',$a->id_asn)}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                    <button type="submit" class="btn btn-sm btn-outline-danger float-right"><i class="fa fa-trash"></i></button>
+                    <button type="submit" class="btn btn-sm btn-outline-danger float-right" title="Hapus"><i class="fa fa-trash"></i></button>
                     </form>
-                    <a href="{{route('asn.edit',$a->id_asn)}}"><button class="btn btn-sm btn-outline-warning float-right"><i class="fa fa-pen"></i></button></a>
+                    <a href="{{route('asn.edit',$a->id_asn)}}"><button class="btn btn-sm btn-outline-warning float-right" title="Edit"><i class="fa fa-pen"></i></button></a>
                 </div>
             </div>
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="card shadow mb-4">
                         <div class="card-header border-0 py-3">
                             <div class="row">
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="card shadow mb-4">
                         <div class="card-header border-0 py-3">
                             <div class="row">
@@ -85,7 +85,12 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <img src="{{url('/assets-admin/img/asn/'.$a->photo)}}" style="border:5px" width="250" height=""/>
+                                @if($a->photo)
+                                    <img src="{{url('/assets-admin/img/asn/'.$a->photo)}}" style="border:5px" width="250" />
+                                @else
+                                    <img src="{{url('/assets-admin/img/asn/default.jpg')}}" style="border:5px" width="250" />
+                                @endif  
+                                {{-- <img src="{{url('/assets-admin/img/asn/'.$a->photo)}}" style="border:5px" width="250" height=""/> --}}
                             </div>
                         </form> 
                         </div>
